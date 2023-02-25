@@ -20,8 +20,14 @@ spec:
         ports:
         - containerPort: 80
         envFrom:
-          - configMapRef:
-              name: db-config
+          - secretRef:
+              name: mongo-secret
+        env:
+          - name: MONGO_DB_ADD
+            valueFrom:
+              configMapKeyRef:
+                name: db-config
+                key: MONGO_DB_ADD
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -43,23 +49,13 @@ spec:
         image: mongo
         ports:
         - containerPort: 27017
-        env:
-        - name: MONGO_INITDB_ROOT_USERNAME
-          valueFrom:
-            configMapKeyRef:
-              name: db-config
-              key: MONGO_INITDB_ROOT_USERNAME
-        - name: MONGO_INITDB_ROOT_PASSWORD
-          valueFrom:
-            configMapKeyRef:
-              name: db-config
-              key: MONGO_INITDB_ROOT_PASSWORD
+        envFrom:
+          - secretRef:
+              name: mongo-secret
         volumeMounts:
           - mountPath: /data/db
             name: mongo-data
       volumes:
        - name: mongo-data
-         hostPath:
-           path: /data
-           type: DirectoryOrCreate
-
+         persistentVolumeClaim:
+           claimName: db-pvc
