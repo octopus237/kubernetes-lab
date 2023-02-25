@@ -44,14 +44,22 @@ spec:
         ports:
         - containerPort: 27017
         env:
-        - name: mongo_user
+        - name: MONGO_INITDB_ROOT_USERNAME
           valueFrom:
             configMapKeyRef:
               name: db-config
               key: MONGO_INITDB_ROOT_USERNAME
-        - name: mongo_pass
+        - name: MONGO_INITDB_ROOT_PASSWORD
           valueFrom:
             configMapKeyRef:
               name: db-config
               key: MONGO_INITDB_ROOT_PASSWORD
+        volumeMounts:
+          - mountPath: /data/db
+            name: mongo-data
+      volumes:
+       - name: mongo-data
+         hostPath:
+           path: /data
+           type: DirectoryOrCreate
 

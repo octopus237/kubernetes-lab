@@ -1,0 +1,12 @@
+apiVersion: v1
+data:
+  config.json: |
+    {
+      "MONGO_INITDB_ROOT_USERNAME": "admin",
+      "MONGO_INITDB_ROOT_PASSWORD": "password",
+      "MONGO_DB_ADD": "mongo-service.default.svc.cluster.local"
+    }
+kind: ConfigMap
+metadata:
+  creationTimestamp: null
+  name: db-json-config
