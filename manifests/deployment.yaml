@@ -5,7 +5,7 @@ metadata:
   labels:
     run: node-depl
 spec:
-  replicas: 1
+  replicas: 3
   selector:
     matchLabels:
       run: node
@@ -28,34 +28,9 @@ spec:
               configMapKeyRef:
                 name: db-config
                 key: MONGO_DB_ADD
----
-apiVersion: apps/v1
-kind: Deployment
-metadata:
-  name: mongo-deployment
-  labels:
-    run: mongo-depl
-spec:
-  selector:
-    matchLabels:
-      run: mongodb
-  template:
-    metadata:
-      labels:
-        run: mongodb
-    spec:
-      containers:
-      - name: mongodb-app
-        image: mongo
-        ports:
-        - containerPort: 27017
-        envFrom:
-          - secretRef:
-              name: mongo-secret
-        volumeMounts:
-          - mountPath: /data/db
-            name: mongo-data
-      volumes:
-       - name: mongo-data
-         persistentVolumeClaim:
-           claimName: db-pvc
+
+      tolerations:
+        - key: "type"
+          operator: "Equal"
+          value: "db"
+          effect: "NoSchedule"

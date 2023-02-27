@@ -1,0 +1,16 @@
+apiVersion: storage.k8s.io/v1
+kind: StorageClass
+metadata:
+  annotations:
+    kubectl.kubernetes.io/last-applied-configuration: |
+      {"apiVersion":"storage.k8s.io/v1","kind":"StorageClass","metadata":{"annotations":{"storageclass.kubernetes.io/is-default-class":"true"},"labels":{"addonmanager.kubernetes.io/mode":"EnsureExists"},"name":"standard"},"provisioner":"k8s.io/minikube-hostpath"}
+    storageclass.kubernetes.io/is-default-class: "true"
+  creationTimestamp: "2023-02-25T09:38:15Z"
+  labels:
+    addonmanager.kubernetes.io/mode: EnsureExists
+  name: standard
+  resourceVersion: "255"
+  uid: abd98b35-e55d-4071-8b33-fb17aa901c5e
+provisioner: k8s.io/minikube-hostpath
+reclaimPolicy: Delete
+volumeBindingMode: Immediate
