@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: busybox
+spec:
+  volumes:
+  - name: nfs-pv-share3
+    persistentVolumeClaim:
+      claimName: mongo-data-mongo-db-sts-2
+  containers:
+  - image: busybox
+    name: busybox
+    volumeMounts:
+    - mountPath: /mnt
+      name: nfs-pv-share3
