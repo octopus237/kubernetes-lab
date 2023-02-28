@@ -13,6 +13,7 @@ spec:
       labels:
         run: mongodb
     spec:
+      terminationGracePeriodSeconds: 10
       containers:
       - name: mongodb-app
         image: mongo
@@ -24,17 +25,12 @@ spec:
         volumeMounts:
           - mountPath: /data/db
             name: mongo-data
-      tolerations:
-        - key: "type"
-          operator: "Equal"
-          value: "db"
-          effect: "NoSchedule"
   volumeClaimTemplates:
     - metadata:
         name: mongo-data
       spec:
-        storageClassName: default
-        accessModes: ["ReadWriteOnce"]
+        storageClassName: ""
+        accessModes: ["ReadWriteMany"]
         resources:
           requests:
-            storage: 90Mi
+            storage: 300Mi

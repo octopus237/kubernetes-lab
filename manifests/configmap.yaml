@@ -5,4 +5,4 @@ metadata:
 data:
   MONGO_INITDB_ROOT_USERNAME: 'admin'
   MONGO_INITDB_ROOT_PASSWORD: 'password'
-  MONGO_DB_ADD: 'mongo-service.default.svc.cluster.local'
+  MONGO_DB_ADD: 'mongo-service.lab4.svc.cluster.local'

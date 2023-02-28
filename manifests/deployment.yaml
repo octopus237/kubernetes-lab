@@ -5,7 +5,7 @@ metadata:
   labels:
     run: node-depl
 spec:
-  replicas: 3
+  replicas: 1
   selector:
     matchLabels:
       run: node
@@ -29,8 +29,4 @@ spec:
                 name: db-config
                 key: MONGO_DB_ADD
 
-      tolerations:
-        - key: "type"
-          operator: "Equal"
-          value: "db"
-          effect: "NoSchedule"
+     

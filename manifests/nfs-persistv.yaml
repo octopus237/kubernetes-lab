@@ -1,41 +1,53 @@
 apiVersion: v1
 kind: PersistentVolume
 metadata:
-  name: db-nfs-pv0
+  name: nfs-pv-share1
 spec:
   capacity:
-    storage: 100Mi
-  storageClassName: manual
+    storage: 1Gi
+  volumeMode: Filesystem
   accessModes:
-    - ReadWriteOnce
+   - ReadWriteMany
+  persistentVolumeReclaimPolicy: Recycle
+  mountOptions:
+    - hard
+    - nfsvers=4.1
   nfs:
+    path: /share1
     server: 10.1.1.28
-    path: "/srv/nfs/kubedata/pv0"
 ---
 apiVersion: v1
 kind: PersistentVolume
 metadata:
-  name: db-nfs-pv1
+  name: nfs-pv-share2
 spec:
   capacity:
-    storage: 100Mi
-  storageClassName: manual
+    storage: 1Gi
+  volumeMode: Filesystem
   accessModes:
-    - ReadWriteOnce
+   - ReadWriteMany
+  persistentVolumeReclaimPolicy: Recycle
+  mountOptions:
+    - hard
+    - nfsvers=4.1
   nfs:
+    path: /share2
     server: 10.1.1.28
-    path: "/srv/nfs/kubedata/pv1"
 ---
 apiVersion: v1
 kind: PersistentVolume
 metadata:
-  name: db-nfs-pv2
+  name: nfs-pv-share3
 spec:
   capacity:
-    storage: 100Mi
-  storageClassName: manual
+    storage: 1Gi
+  volumeMode: Filesystem
   accessModes:
-    - ReadWriteOnce
+   - ReadWriteMany
+  persistentVolumeReclaimPolicy: Recycle
+  mountOptions:
+    - hard
+    - nfsvers=4.1
   nfs:
+    path: /share3
     server: 10.1.1.28
-    path: "/srv/nfs/kubedata/pv2"
