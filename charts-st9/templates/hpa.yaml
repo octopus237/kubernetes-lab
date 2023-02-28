@@ -2,14 +2,14 @@
 apiVersion: autoscaling/v2beta1
 kind: HorizontalPodAutoscaler
 metadata:
-  name: {{ include "ls-lab04-st9.fullname" . }}
+  name: {{ include "charts-st9.fullname" . }}
   labels:
-    {{- include "ls-lab04-st9.labels" . | nindent 4 }}
+    {{- include "charts-st9.labels" . | nindent 4 }}
 spec:
   scaleTargetRef:
     apiVersion: apps/v1
     kind: Deployment
-    name: {{ include "ls-lab04-st9.fullname" . }}
+    name: {{ include "charts-st9.fullname" . }}
   minReplicas: {{ .Values.autoscaling.minReplicas }}
   maxReplicas: {{ .Values.autoscaling.maxReplicas }}
   metrics:

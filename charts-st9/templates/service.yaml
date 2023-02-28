@@ -1,9 +1,9 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: {{ include "ls-lab04-st9.fullname" . }}
+  name: {{ include "charts-st9.fullname" . }}
   labels:
-    {{- include "ls-lab04-st9.labels" . | nindent 4 }}
+    {{- include "charts-st9.labels" . | nindent 4 }}
 spec:
   type: {{ .Values.service.type }}
   ports:
@@ -12,4 +12,4 @@ spec:
       protocol: TCP
       name: http
   selector:
-    {{- include "ls-lab04-st9.selectorLabels" . | nindent 4 }}
+    {{- include "charts-st9.selectorLabels" . | nindent 4 }}
