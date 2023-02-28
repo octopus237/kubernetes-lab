@@ -1,0 +1,29 @@
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  namespace: {{ .Values.namespace }}
+  name: {{ .Values.pvc }}
+spec:
+  capacity:
+    storage: 2Gi
+  storageClassName: {{ .Values.scname }}
+  volumeMode: Filesystem
+  accessModes:
+    - ReadWriteOnce
+  hostPath:
+    path: /mongo-pv2
+    type: DirectoryOrCreate
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  namespace: {{ .Values.namespace }}
+  name: {{ .Values.pvc }}
+spec:
+  storageClassName: {{ .Values.scname }}
+  volumeName: {{ .Values.pvc }}
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 1Gi
